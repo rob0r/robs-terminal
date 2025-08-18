@@ -1,0 +1,28 @@
+---
+- name: Run ubuntu specific tasks
+  ansible.builtin.include_tasks: ubuntu.yaml
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Git clone pyenv  # noqa: latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: "{{ pyenv_root }}"
+
+- name: Git clone pyenv-virtualenv  # noqa: latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv-virtualenv.git
+    dest: "{{ pyenv_root }}/plugins/pyenv-virtualenv"
+
+- name: Get python versions page content
+  ansible.builtin.uri:
+    url: https://www.python.org/doc/versions/
+    return_content: true
+  register: pyenv_versions_page
+
+- name: Extract latest stable Python version with regex
+  ansible.builtin.set_fact:
+    pyenv_latest_version: "{{ pyenv_versions_page.content | regex_search('Python ([0-9]+\\.[0-9]+\\.[0-9]+)', '\\1') }}"
+
+- name: Show latest Python version
+  ansible.builtin.debug:
+    msg: "Latest stable Python version is {{ pyenv_latest_version }}"

@@ -1,0 +1,49 @@
+# {{ ansible_managed }}
+
+# if you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# initialise starship for zsh
+eval "$(starship init zsh)"
+
+# history settings
+HISTFILE=~/.zsh_history         # file to save history between sessions
+HISTSIZE=10000                  # number of commands to keep in memory
+SAVEHIST=10000                  # number of commands to save in the history file
+
+# history options
+setopt HIST_IGNORE_DUPS         # don't store duplicate commands
+setopt HIST_IGNORE_ALL_DUPS     # remove older duplicate commands when a new one is added
+setopt HIST_REDUCE_BLANKS       # remove superfluous blanks before recording
+setopt HIST_VERIFY              # don't execute immediately when recalled, let me edit first
+setopt SHARE_HISTORY            # share history across all sessions (advanced users)
+setopt INC_APPEND_HISTORY       # immediately append to history instead of overwriting
+setopt EXTENDED_HISTORY         # record timestamp of each command
+setopt HIST_EXPIRE_DUPS_FIRST   # expire duplicate entries first when trimming history
+
+# pyenv and pyenv virtualenv config
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1    # don't need this as starship displays the venv name
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
+
+# source plugins
+source {{ zsh_root }}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source {{ zsh_root }}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source {{ zsh_root }}/plugins/zsh-completitions/zsh-completions.plugin.zsh
+
+{% if ansible_facts['distribution'] == 'MacOSX' %}
+#
+# MacOSX specific settings
+#
+
+{% elif ansible_facts['distribution'] == 'Ubuntu' %}
+#
+# Ubuntu specific settings
+#
+
+# fix ctrl + left/right arrow in Windows Terminal with Zsh
+bindkey "^[[1;5C" forward-word     # ctrl + right
+bindkey "^[[1;5D" backward-word    # ctrl + left
+{% endif %}

@@ -1,0 +1,9 @@
+---
+- name: Show vars
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Show vars
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts }}"

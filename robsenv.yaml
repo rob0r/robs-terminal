@@ -1,0 +1,25 @@
+---
+- name: Robs environment
+  hosts: localhost
+  connection: local
+
+  pre_tasks:
+    - name: MOTD
+      ansible.builtin.debug:
+        msg:
+          - "+-----------------------------------------+"
+          - "|         Robs Environment Config         |"
+          - "+-----------------------------------------+"
+          - "Hi {{ ansible_facts.user_id }}, Your current shell is: {{ ansible_facts.user_shell }}"
+          - ""
+          - "Running on:"
+          - "     Machine:            {{ ansible_facts.machine }}"
+          - "     Kernel:             {{ ansible_facts.kernel }}"
+          - "     Kernel ver:         {{ ansible_facts.kernel_version }}"
+          - "     Distribution:       {{ ansible_facts.distribution }}"
+          - "     Distribution ver:   {{ ansible_facts.distribution_version }}"
+
+
+  roles:
+    - zsh
+    - pyenv
