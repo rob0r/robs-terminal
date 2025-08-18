@@ -31,7 +31,7 @@ eval "$(pyenv virtualenv-init -)"
 # source plugins
 source {{ zsh_root }}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source {{ zsh_root }}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source {{ zsh_root }}/plugins/zsh-completitions/zsh-completions.plugin.zsh
+source {{ zsh_root }}/plugins/zsh-completions/zsh-completions.plugin.zsh
 
 {% if ansible_facts['distribution'] == 'MacOSX' %}
 #

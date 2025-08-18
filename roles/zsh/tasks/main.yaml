@@ -24,10 +24,10 @@
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
     dest: "{{ zsh_root }}/plugins/zsh-autosuggestions"
 
-- name: Git clone zsh-completitions  # noqa: latest[git]
+- name: Git clone zsh-completions  # noqa: latest[git]
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-completions.git
-    dest: "{{ zsh_root }}/plugins/zsh-completitions"
+    dest: "{{ zsh_root }}/plugins/zsh-completions"
 
 - name: Setup .zshrc template
   ansible.builtin.template:
