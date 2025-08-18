@@ -43,7 +43,11 @@ source {{ zsh_root }}/plugins/zsh-completitions/zsh-completions.plugin.zsh
 # Ubuntu specific settings
 #
 
-# fix ctrl + left/right arrow in Windows Terminal with Zsh
+# bindkey word navigation
 bindkey "^[[1;5C" forward-word     # ctrl + right
 bindkey "^[[1;5D" backward-word    # ctrl + left
+
+# bindkey word deletion
+bindkey "^H" backward-kill-word    # ctrl + backspace (delete word backward)
+bindkey "^[[3;5~" kill-word        # ctrl + delete (delete word forward)
 {% endif %}
