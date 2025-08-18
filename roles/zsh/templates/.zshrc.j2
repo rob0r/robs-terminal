@@ -1,5 +1,7 @@
 # {{ ansible_managed }}
 
+#zmodload zsh/zprof                 # enable zsh profiling
+
 # if you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -7,19 +9,19 @@
 eval "$(starship init zsh)"
 
 # history settings
-HISTFILE=~/.zsh_history         # file to save history between sessions
-HISTSIZE=10000                  # number of commands to keep in memory
-SAVEHIST=10000                  # number of commands to save in the history file
+HISTFILE=~/.zsh_history             # file to save history between sessions
+HISTSIZE=10000                      # number of commands to keep in memory
+SAVEHIST=10000                      # number of commands to save in the history file
 
 # history options
-setopt HIST_IGNORE_DUPS         # don't store duplicate commands
-setopt HIST_IGNORE_ALL_DUPS     # remove older duplicate commands when a new one is added
-setopt HIST_REDUCE_BLANKS       # remove superfluous blanks before recording
-setopt HIST_VERIFY              # don't execute immediately when recalled, let me edit first
-setopt SHARE_HISTORY            # share history across all sessions (advanced users)
-setopt INC_APPEND_HISTORY       # immediately append to history instead of overwriting
-setopt EXTENDED_HISTORY         # record timestamp of each command
-setopt HIST_EXPIRE_DUPS_FIRST   # expire duplicate entries first when trimming history
+setopt HIST_IGNORE_DUPS             # don't store duplicate commands
+setopt HIST_IGNORE_ALL_DUPS         # remove older duplicate commands when a new one is added
+setopt HIST_REDUCE_BLANKS           # remove superfluous blanks before recording
+setopt HIST_VERIFY                  # don't execute immediately when recalled, let me edit first
+setopt SHARE_HISTORY                # share history across all sessions (advanced users)
+setopt INC_APPEND_HISTORY           # immediately append to history instead of overwriting
+setopt EXTENDED_HISTORY             # record timestamp of each command
+setopt HIST_EXPIRE_DUPS_FIRST       # expire duplicate entries first when trimming history
 
 # pyenv and pyenv virtualenv config
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1    # don't need this as starship displays the venv name
@@ -33,14 +35,18 @@ source {{ zsh_root }}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.
 source {{ zsh_root }}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source {{ zsh_root }}/plugins/zsh-completions/zsh-completions.plugin.zsh
 
-# initialise completion system
-autoload -Uz compinit
-compinit
-
 {% if ansible_facts['distribution'] == 'MacOSX' %}
 #
 # MacOSX specific settings
 #
+
+# rebuild completion system .zcompdump cache if missing or older than 1 day
+# not necessary on Ubuntu as compinit is done in the /etc/zsh/zshrc file
+if [[ ! -f ~/.zcompdump || $(date +%s) -gt $(( $(stat -c %Y ~/.zcompdump) + 86400 )) ]]; then
+  compinit -u
+else
+  compinit -u -C
+fi
 
 {% elif ansible_facts['distribution'] == 'Ubuntu' %}
 #
@@ -48,10 +54,12 @@ compinit
 #
 
 # bindkey word navigation
-bindkey "^[[1;5C" forward-word     # ctrl + right
-bindkey "^[[1;5D" backward-word    # ctrl + left
+bindkey "^[[1;5C" forward-word      # ctrl + right
+bindkey "^[[1;5D" backward-word     # ctrl + left
 
 # bindkey word deletion
-bindkey "^H" backward-kill-word    # ctrl + backspace (delete word backward)
-bindkey "^[[3;5~" kill-word        # ctrl + delete (delete word forward)
+bindkey "^H" backward-kill-word     # ctrl + backspace (delete word backward)
+bindkey "^[[3;5~" kill-word         # ctrl + delete (delete word forward)
 {% endif %}
+
+#zprof                              # zsh profiling
