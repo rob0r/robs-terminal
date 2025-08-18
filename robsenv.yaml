@@ -19,7 +19,6 @@
           - "     Distribution:       {{ ansible_facts.distribution }}"
           - "     Distribution ver:   {{ ansible_facts.distribution_version }}"
 
-
   roles:
     - zsh
     - pyenv
