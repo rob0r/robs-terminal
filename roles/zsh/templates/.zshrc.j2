@@ -42,7 +42,8 @@ source {{ zsh_root }}/plugins/zsh-completions/zsh-completions.plugin.zsh
 
 # rebuild completion system .zcompdump cache if missing or older than 1 day
 # not necessary on Ubuntu as compinit is done in the /etc/zsh/zshrc file
-if [[ ! -f ~/.zcompdump || $(date +%s) -gt $(( $(stat -c %Y ~/.zcompdump) + 86400 )) ]]; then
+autoload -U compinit
+if [[ ! -f ~/.zcompdump || $(date +%s) -gt $(( $(stat -f %m ~/.zcompdump) + 86400 )) ]]; then
   compinit -u
 else
   compinit -u -C
