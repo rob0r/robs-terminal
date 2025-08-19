@@ -36,7 +36,6 @@ source {{ zsh_root }}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source {{ zsh_root }}/plugins/zsh-completions/zsh-completions.plugin.zsh
 
 # zsh-completion configuration
-autoload -Uz compinit && compinit                           # initialize completion system
 zstyle ':completion:*' menu select                          # enable menu selection for completions
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # case insensitive matching
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # colorize completions
