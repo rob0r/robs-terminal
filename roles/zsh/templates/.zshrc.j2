@@ -35,6 +35,25 @@ source {{ zsh_root }}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.
 source {{ zsh_root }}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source {{ zsh_root }}/plugins/zsh-completions/zsh-completions.plugin.zsh
 
+# zsh-completion configuration
+autoload -Uz compinit && compinit                           # initialize completion system
+zstyle ':completion:*' menu select                          # enable menu selection for completions
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # case insensitive matching
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # colorize completions
+setopt AUTO_MENU                                            # automatically show menu after second tab
+setopt COMPLETE_IN_WORD                                     # allow completion in the middle of words
+setopt ALWAYS_TO_END                                        # move cursor to end of word after completion
+
+# zsh-completion menu navigation keybindings
+zmodload zsh/complist                                       # load completion list module
+bindkey -M menuselect '^M' accept-line                      # enter to accept selection
+bindkey -M menuselect '^[[Z' reverse-menu-complete          # shift+tab to go backwards
+bindkey -M menuselect '^I' menu-complete                    # tab to go forwards
+bindkey -M menuselect '^[[A' up-line-or-history             # up arrow
+bindkey -M menuselect '^[[B' down-line-or-history           # down arrow
+bindkey -M menuselect '^[[C' forward-char                   # right arrow
+bindkey -M menuselect '^[[D' backward-char                  # left arrow
+
 {% if ansible_facts['distribution'] == 'MacOSX' %}
 #
 # MacOSX specific settings
