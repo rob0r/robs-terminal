@@ -1,0 +1,55 @@
+---
+- name: Check if starship is installed
+  ansible.builtin.command: starship --version
+  register: zsh_starship_version_output
+  failed_when: false
+  changed_when: false
+
+- name: Set current version from starship output
+  ansible.builtin.set_fact:
+    zsh_starship_current_version: "{{ zsh_starship_version_output.stdout_lines[0].split()[1] }}"
+  when: zsh_starship_version_output.rc == 0
+
+- name: Set current version to 0.0.0 if starship is not installed
+  ansible.builtin.set_fact:
+    zsh_starship_current_version: "0.0.0"
+  when: zsh_starship_version_output.rc != 0
+
+- name: Get latest starship release info from github
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/starship/starship/releases/latest
+    return_content: true
+  register: zsh_starship_latest_release
+  changed_when: false
+
+- name: Extract latest version number
+  ansible.builtin.set_fact:
+    zsh_starship_latest_version: "{{ zsh_starship_latest_release.json.tag_name | regex_replace('^v', '') }}"
+
+- name: Show current and latest starship versions
+  ansible.builtin.debug:
+    msg: "Current: {{ zsh_starship_current_version }} | Latest: {{ zsh_starship_latest_version }}"
+
+- name: Install or update starship to latest version
+  when: zsh_starship_current_version is version(zsh_starship_latest_version, '<')
+  block:
+    - name: Download starship install script
+      ansible.builtin.get_url:
+        url: https://starship.rs/install.sh
+        dest: /tmp/starship_install.sh
+        mode: '0755'
+
+    - name: Run starship install script
+      ansible.builtin.command: /bin/sh /tmp/starship_install.sh --yes
+      register: zsh_starship_install_result
+      changed_when: true
+      become: true
+
+    - name: Remove install script
+      ansible.builtin.file:
+        path: /tmp/starship_install.sh
+        state: absent
+
+    - name: Show installation result
+      ansible.builtin.debug:
+        msg: "Starship updated from {{ zsh_starship_current_version }} to {{ zsh_starship_latest_version }}"
