@@ -3,16 +3,8 @@
   ansible.builtin.include_tasks: ubuntu.yaml
   when: ansible_facts['distribution'] == 'Ubuntu'
 
-- name: Download starship install script
-  ansible.builtin.get_url:
-    url: https://starship.rs/install.sh
-    dest: /tmp/starship_install.sh
-    mode: '0755'
-
-- name: Run starship install script  # noqa: command-instead-of-shell
-  ansible.builtin.shell: /tmp/starship_install.sh -y
-  args:
-    creates: /usr/local/bin/starship
+- name: Run starship tasks
+  ansible.builtin.include_tasks: starship.yaml
 
 - name: Git clone fast-syntax-highlighting  # noqa: latest[git]
   ansible.builtin.git:
