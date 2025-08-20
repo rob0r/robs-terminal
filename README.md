@@ -17,14 +17,14 @@ ensure a font from https://www.nerdfonts.com/font-downloads is used for your ter
     sudo apt update
     sudo apt upgrade -y
     sudo apt install ansible
-    git clone https://github.com/rob0r/robs-ansible.git
-    cd robs-ansible
+    git clone https://github.com/rob0r/robs-terminal.git
+    cd robs-terminal
     ansible-playbook robsenv.yaml --ask-become
 
 ### MacOS 15
     brew install ansible
-    git clone https://github.com/rob0r/robs-ansible.git
-    cd robs-ansible
+    git clone https://github.com/rob0r/robs-terminal.git
+    cd robs-terminal
     ansible-playbook robsenv.yaml
 
 ----------
