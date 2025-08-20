@@ -19,7 +19,7 @@ ensure a font from https://www.nerdfonts.com/font-downloads is used for your ter
     sudo apt install ansible
     git clone https://github.com/rob0r/robs-terminal.git
     cd robs-terminal
-    ansible-playbook robsenv.yaml --ask-become
+    ansible-playbook robsenv.yaml --ask-become-pass
 
 ### MacOS 15
     brew install ansible
