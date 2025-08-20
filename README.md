@@ -1,4 +1,4 @@
-# Robs terminal environemnt ansible
+# Robs terminal ansible
 
 This ansible aims to keep terminal things as consistent as possible between WSL2 Ubuntu and MacOS
 
