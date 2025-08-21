@@ -56,6 +56,6 @@
 
 - name: Setup starship.toml template
   ansible.builtin.template:
-    src: starship.toml.j2
+    src: "{{ zsh_starship_config_template }}"
     dest: ~/.config/starship.toml
     mode: '0644'

@@ -1,2 +1,3 @@
 ---
 zsh_root: ~/.zsh
+zsh_starship_config_template: starship_extended.toml.j2

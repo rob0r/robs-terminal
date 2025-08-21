@@ -1,0 +1,42 @@
+format = """$all"""
+right_format = """$cmd_duration $status ${custom.my_load_module} $memory_usage $time """
+
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+
+
+[status]
+style = 'bold dimmed yellow'
+symbol = '🔴'
+success_symbol = '🟢'
+format = '[$signal_name $status $symbol]($style) '
+map_symbol = true
+disabled = false
+
+[cmd_duration]
+min_time = 0
+show_milliseconds = true
+format = "⌛ [$duration]($style)"
+style = 'bold dimmed white'
+
+[memory_usage]
+disabled = false
+threshold = 0
+format = '🐏 [${ram}( | ${swap})]($style)'
+style = 'bold dimmed green'
+
+[time]
+disabled = false
+format = '🕙 [$time]($style) '
+time_format = '%T'
+style = 'bold dimmed yellow'
+
+[custom.my_load_module]
+{% if ansible_facts['distribution'] == 'MacOSX' %}
+command = "sysctl -n vm.loadavg | awk '{print $2}'"
+{% elif ansible_facts['distribution'] == 'Ubuntu' %}
+command = "awk '{print $1}' </proc/loadavg"
+{% endif %}
+format = "[🏋️ $output](bold dimmed red) "
+when = "true"
