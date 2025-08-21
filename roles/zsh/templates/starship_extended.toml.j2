@@ -10,7 +10,7 @@ truncate_to_repo = false
 style = 'bold dimmed yellow'
 symbol = '🔴'
 success_symbol = '🟢'
-format = '[$signal_name $status $symbol]($style) '
+format = '[$signal_name $status $symbol]($style)'
 map_symbol = true
 disabled = false
 
@@ -28,7 +28,7 @@ style = 'bold dimmed green'
 
 [time]
 disabled = false
-format = '🕙 [$time]($style) '
+format = '🕙 [$time]($style)'
 time_format = '%T'
 style = 'bold dimmed yellow'
 
@@ -38,5 +38,5 @@ command = "sysctl -n vm.loadavg | awk '{print $2}'"
 {% elif ansible_facts['distribution'] == 'Ubuntu' %}
 command = "awk '{print $1}' </proc/loadavg"
 {% endif %}
-format = "[🏋️ $output](bold dimmed red) "
+format = "[🏋️ $output](bold dimmed red)"
 when = "true"
