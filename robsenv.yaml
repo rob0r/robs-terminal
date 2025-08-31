@@ -14,9 +14,6 @@
           - ""
           - "Running on"
           - " |_ Machine                {{ ansible_facts.machine }}"
-          - " |_ Memory                 {{ ansible_facts.memtotal_mb }}"
-          - " |_ Processor cores        {{ ansible_facts.processor_cores }}"
-          - " |_ Processor vCPUs        {{ ansible_facts.processor_vcpus }}"
           - " |_ Kernel                 {{ ansible_facts.kernel }}"
           - " |_ Kernel ver             {{ ansible_facts.kernel_version }}"
           - " |_ Distribution           {{ ansible_facts.distribution }}"
@@ -25,3 +22,4 @@
   roles:
     - zsh
     - pyenv
+    - cloudflare
