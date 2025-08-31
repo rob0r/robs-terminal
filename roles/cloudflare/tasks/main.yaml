@@ -1,0 +1,4 @@
+---
+- name: Run ubuntu specific tasks
+  ansible.builtin.include_tasks: ubuntu.yaml
+  when: ansible_facts['distribution'] == 'Ubuntu'
