@@ -57,6 +57,7 @@ bindkey -M menuselect '^[[D' backward-char                  # left arrow
 #
 # MacOSX specific settings
 #
+alias ls='ls -G'
 
 # rebuild completion system .zcompdump cache if missing or older than 1 day
 # not necessary on Ubuntu as compinit is done in the /etc/zsh/zshrc file
@@ -71,6 +72,7 @@ fi
 #
 # Ubuntu specific settings
 #
+alias ls='ls --color=auto'
 
 # bindkey word navigation
 bindkey "^[[1;5C" forward-word      # ctrl + right
