@@ -22,4 +22,3 @@
   roles:
     - zsh
     - pyenv
-    - cloudflare
