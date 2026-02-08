@@ -54,6 +54,12 @@
       ansible.builtin.debug:
         msg: "Starship updated from {{ zsh_starship_current_version }} to {{ zsh_starship_latest_version }}"
 
+- name: Ensure ~/.config directory exists
+  ansible.builtin.file:
+    path: ~/.config
+    state: directory
+    mode: '0700'
+
 - name: Setup starship.toml template
   ansible.builtin.template:
     src: "{{ zsh_starship_config_template }}"
