@@ -60,11 +60,12 @@ alias ls='ls -G'
 
 # rebuild completion system .zcompdump cache if missing or older than 1 day
 # not necessary on Ubuntu as compinit is done in the /etc/zsh/zshrc file
+# uses zsh builtins (glob qualifier, EPOCHSECONDS) to avoid forking subprocesses
 autoload -U compinit
-if [[ ! -f ~/.zcompdump || $(date +%s) -gt $(( $(stat -f %m ~/.zcompdump) + 86400 )) ]]; then
-  compinit -u
+if [[ -f ~/.zcompdump(#qN.mh-24) ]]; then
+  compinit -i -C
 else
-  compinit -u -C
+  compinit -i
 fi
 
 {% elif ansible_facts['distribution'] == 'Ubuntu' %}
