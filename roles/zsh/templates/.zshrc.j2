@@ -52,6 +52,24 @@ bindkey -M menuselect '^[[B' down-line-or-history           # down arrow
 bindkey -M menuselect '^[[C' forward-char                   # right arrow
 bindkey -M menuselect '^[[D' backward-char                  # left arrow
 
+# terminal key bindings for modern terminals
+# Delete, Home, End keys
+bindkey '^[[3~' delete-char              # Delete
+bindkey '^[[H' beginning-of-line         # Home
+bindkey '^[[F' end-of-line               # End
+bindkey '^[OH' beginning-of-line         # Home (alternative)
+bindkey '^[OF' end-of-line               # End (alternative)
+
+# Word navigation
+bindkey '^[[1;5C' forward-word           # Ctrl+Right
+bindkey '^[[1;5D' backward-word          # Ctrl+Left
+bindkey '^[[1;3C' forward-word           # Option+Right
+bindkey '^[[1;3D' backward-word          # Option+Left
+
+# Delete word
+bindkey '^[[3;5~' kill-word              # Ctrl+Delete
+bindkey '^H' backward-delete-char        # Backspace
+
 {% if ansible_facts['distribution'] == 'MacOSX' %}
 #
 # MacOSX specific settings
