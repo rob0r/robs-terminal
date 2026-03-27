@@ -24,10 +24,13 @@ setopt EXTENDED_HISTORY             # record timestamp of each command
 setopt HIST_EXPIRE_DUPS_FIRST       # expire duplicate entries first when trimming history
 
 # pyenv and pyenv virtualenv config
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1    # don't need this as starship displays the venv name
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1    # don't need this as starship displays the venv name
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init - zsh)"
+
+# mise config
+eval "$(mise activate zsh)"
 
 # source plugins
 source {{ zsh_root }}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

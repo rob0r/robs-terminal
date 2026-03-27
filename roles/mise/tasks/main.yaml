@@ -1,0 +1,8 @@
+---
+- name: Run ubuntu specific tasks
+  ansible.builtin.include_tasks: ubuntu.yaml
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Run macos specific tasks
+  ansible.builtin.include_tasks: macos.yaml
+  when: ansible_facts['distribution'] == 'MacOSX'

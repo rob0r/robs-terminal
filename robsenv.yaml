@@ -21,4 +21,5 @@
 
   roles:
     - zsh
+    - mise
     - pyenv

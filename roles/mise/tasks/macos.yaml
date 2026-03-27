@@ -1,0 +1,5 @@
+---
+- name: Install mise
+  ansible.builtin.command: brew install mise
+  register: mise_brew_result
+  changed_when: "'already installed' not in mise_brew_result.stderr"
