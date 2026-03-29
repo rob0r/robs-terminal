@@ -28,17 +28,5 @@ ensure a font from https://www.nerdfonts.com/font-downloads is used for your ter
     ansible-playbook robsenv.yaml
 
 ----------
-## Developing
-
-### pyenv and dependencies
-    # create virtualenv with name ansible
-    pyenv virtualenv 3.13.7 ansible
-
-    # create .python-version file with new python env
-    echo 'ansible' > .python-version
-
-    # install requirements
-    pip install -r requirements.txt
-
 ### Style
 Working towards green ansible-lint runs however sometimes a little # noqa magic is the only path forward :)
