@@ -5,15 +5,9 @@
   failed_when: false
   changed_when: false
 
-- name: Set current version from starship output
+- name: Set current starship version
   ansible.builtin.set_fact:
-    zsh_starship_current_version: "{{ zsh_starship_version_output.stdout_lines[0].split()[1] }}"
-  when: zsh_starship_version_output.rc == 0
-
-- name: Set current version to 0.0.0 if starship is not installed
-  ansible.builtin.set_fact:
-    zsh_starship_current_version: "0.0.0"
-  when: zsh_starship_version_output.rc != 0
+    zsh_starship_current_version: "{{ zsh_starship_version_output.stdout_lines[0].split()[1] if zsh_starship_version_output.rc == 0 else '0.0.0' }}"
 
 - name: Get latest starship release info from github
   ansible.builtin.uri:
