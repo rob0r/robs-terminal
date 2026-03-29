@@ -6,3 +6,10 @@
 - name: Run macos specific tasks
   ansible.builtin.include_tasks: macos.yaml
   when: ansible_facts['distribution'] == 'MacOSX'
+
+- name: Run mise tools installation tasks
+  ansible.builtin.include_tasks: tools.yaml
+
+- name: Set mise trusted_config_paths
+  ansible.builtin.command: mise settings set trusted_config_paths '["~/code"]'
+  changed_when: false
