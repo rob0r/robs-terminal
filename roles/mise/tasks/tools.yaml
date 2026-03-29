@@ -1,0 +1,14 @@
+- name: Mise use -g uv@latest
+  ansible.builtin.command: mise use -g uv@latest
+  args:
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/uv/latest"
+
+- name: Mise use -g python@latest
+  ansible.builtin.command: mise use -g python@latest
+  args:
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/python/latest"
+
+- name: Mise use -g fzf@latest
+  ansible.builtin.command: mise use -g fzf@latest
+  args:
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/fzf/latest"
