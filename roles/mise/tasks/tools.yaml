@@ -1,14 +1,5 @@
-- name: Mise use -g uv@latest
-  ansible.builtin.command: mise use -g uv@latest
+- name: "Mise use -g {{ item }}"  # noqa: latest[command-instead-of-shell]
+  ansible.builtin.command: "mise use -g {{ item }}"
   args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/uv/latest"
-
-- name: Mise use -g python@latest
-  ansible.builtin.command: mise use -g python@latest
-  args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/python/latest"
-
-- name: Mise use -g fzf@latest
-  ansible.builtin.command: mise use -g fzf@latest
-  args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/fzf/latest"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/{{ item.split('@')[0] }}/{{ item.split('@')[1] }}"
+  loop: "{{ mise_tools }}"

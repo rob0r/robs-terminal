@@ -30,9 +30,9 @@ setopt EXTENDED_HISTORY             # record timestamp of each command
 setopt HIST_EXPIRE_DUPS_FIRST       # expire duplicate entries first when trimming history
 
 # source plugins
-source {{ zsh_root }}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source {{ zsh_root }}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source {{ zsh_root }}/plugins/zsh-completions/zsh-completions.plugin.zsh
+{% for plugin in zsh_plugins %}
+source {{ zsh_root }}/plugins/{{ plugin.name }}/{{ plugin.source }}
+{% endfor %}
 
 # zsh-completion configuration
 zstyle ':completion:*' menu select                          # enable menu selection for completions

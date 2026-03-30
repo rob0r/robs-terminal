@@ -6,20 +6,13 @@
 - name: Run starship tasks
   ansible.builtin.include_tasks: starship.yaml
 
-- name: Git clone fast-syntax-highlighting  # noqa: latest[git]
+- name: "Git clone zsh plugins"  # noqa: latest[git]
   ansible.builtin.git:
-    repo: https://github.com/zdharma-continuum/fast-syntax-highlighting.git
-    dest: "{{ zsh_root }}/plugins/fast-syntax-highlighting"
-
-- name: Git clone zsh-autosuggestions  # noqa: latest[git]
-  ansible.builtin.git:
-    repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: "{{ zsh_root }}/plugins/zsh-autosuggestions"
-
-- name: Git clone zsh-completions  # noqa: latest[git]
-  ansible.builtin.git:
-    repo: https://github.com/zsh-users/zsh-completions.git
-    dest: "{{ zsh_root }}/plugins/zsh-completions"
+    repo: "{{ item.repo }}"
+    dest: "{{ zsh_root }}/plugins/{{ item.name }}"
+  loop: "{{ zsh_plugins }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: Setup .zshrc template
   ansible.builtin.template:

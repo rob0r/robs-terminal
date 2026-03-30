@@ -1,3 +1,14 @@
 ---
 zsh_root: ~/.zsh
 zsh_starship_config_template: starship_minimal.toml.j2
+
+zsh_plugins:
+  - name: fast-syntax-highlighting
+    repo: https://github.com/zdharma-continuum/fast-syntax-highlighting.git
+    source: fast-syntax-highlighting.plugin.zsh
+  - name: zsh-autosuggestions
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    source: zsh-autosuggestions.plugin.zsh
+  - name: zsh-completions
+    repo: https://github.com/zsh-users/zsh-completions.git
+    source: zsh-completions.plugin.zsh
