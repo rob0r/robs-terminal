@@ -1,4 +1,4 @@
-- name: "Mise use -g {{ item }}"  # noqa: latest[command-instead-of-shell]
+- name: "Mise use -g tools"  # noqa: latest[command-instead-of-shell]
   ansible.builtin.command: "mise use -g {{ item }}"
   args:
     creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/{{ item.split('@')[0] }}/{{ item.split('@')[1] }}"
