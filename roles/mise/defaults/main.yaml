@@ -3,6 +3,7 @@ mise_tools:
   - uv@latest
   - python@latest
   - fzf@latest
+  - gh@latest
 
 mise_trusted_config_paths:
   - ~/code
