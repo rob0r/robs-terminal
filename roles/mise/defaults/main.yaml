@@ -6,4 +6,4 @@ mise_tools:
   - gh@latest
 
 mise_trusted_config_paths:
-  - ~/code
+  - "{{ ansible_facts.env.HOME }}/code"

@@ -10,6 +10,13 @@
 - name: Run mise tools installation tasks
   ansible.builtin.include_tasks: tools.yaml
 
-- name: "Set mise trusted_config_paths"
-  ansible.builtin.command: "mise settings set trusted_config_paths {{ mise_trusted_config_paths | to_json }}"
+- name: Check current trusted_config_paths
+  ansible.builtin.command: mise settings get trusted_config_paths
+  register: mise_current_trusted
   changed_when: false
+  failed_when: false
+
+- name: Add mise trusted_config_paths
+  ansible.builtin.command: "mise settings add trusted_config_paths {{ item }}"
+  loop: "{{ mise_trusted_config_paths }}"
+  when: item not in mise_current_trusted.stdout
