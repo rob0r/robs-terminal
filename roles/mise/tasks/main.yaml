@@ -11,6 +11,5 @@
   ansible.builtin.include_tasks: tools.yaml
 
 - name: "Set mise trusted_config_paths"
-  ansible.builtin.command: "mise settings add trusted_config_paths {{ item }}"
+  ansible.builtin.command: "mise settings set trusted_config_paths {{ mise_trusted_config_paths | to_json }}"
   changed_when: false
-  loop: "{{ mise_trusted_config_paths }}"
