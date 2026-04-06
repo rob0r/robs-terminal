@@ -8,9 +8,8 @@
 # initialise starship for zsh
 eval "$(starship init zsh)"
 
-# initialise mise for zsh and enable auto completion
+# initialise mise for zsh
 eval "$(mise activate zsh)"
-eval "$(mise completion zsh)"
 
 # initialise fzf for zsh
 eval "$(fzf --zsh)"
@@ -101,5 +100,8 @@ bindkey "^[[1;5D" backward-word     # ctrl + left
 bindkey "^H" backward-kill-word     # ctrl + backspace (delete word backward)
 bindkey "^[[3;5~" kill-word         # ctrl + delete (delete word forward)
 {% endif %}
+
+# initialise mise completions
+eval "$(mise completion zsh)"
 
 #zprof                              # zsh profiling
