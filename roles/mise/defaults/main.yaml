@@ -1,9 +1,10 @@
 ---
 mise_tools:
-  - uv@latest
-  - python@latest
-  - fzf@latest
-  - gh@latest
+  - usage@latest  # CLI help/manpage helper for commands and tools
+  - uv@latest     # Fast Python package and virtual environment manager
+  - python@latest # Python runtime used for scripts and automation
+  - fzf@latest    # Fuzzy finder for interactive shell/file history searches
+  - gh@latest     # GitHub CLI for PRs, issues, and repo workflows
 
 mise_trusted_config_paths:
   - "{{ ansible_facts.env.HOME }}/code"

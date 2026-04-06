@@ -20,3 +20,4 @@
   ansible.builtin.command: "mise settings add trusted_config_paths {{ item }}"
   loop: "{{ mise_trusted_config_paths }}"
   when: item not in mise_current_trusted.stdout
+  changed_when: true
