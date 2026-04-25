@@ -1,0 +1,8 @@
+[tools]
+uv = "latest"
+
+[env]
+_.python.venv = { path = ".venv", create = true }
+
+[tasks.install]
+run = "uv pip install -r requirements.txt"
