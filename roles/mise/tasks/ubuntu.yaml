@@ -1,27 +1,4 @@
 ---
-- name: Ensure required APT keyring directory exists
-  ansible.builtin.file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: '0755'
-  become: true
-
-- name: Download mise GPG key
-  ansible.builtin.get_url:
-    url: https://mise.jdx.dev/gpg-key.pub
-    dest: /etc/apt/keyrings/mise-archive-keyring.asc
-    mode: '0644'
-    force: true
-  become: true
-
-- name: Add mise APT repository
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.asc] https://mise.jdx.dev/deb stable main"
-    filename: mise
-    state: present
-    update_cache: true
-  become: true
-
 - name: Install mise
   ansible.builtin.apt:
     name: mise
