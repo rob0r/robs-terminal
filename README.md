@@ -21,7 +21,9 @@ Ensure a font from https://www.nerdfonts.com/font-downloads is used for your ter
     cd robs-terminal
     ansible-playbook robsenv.yaml --ask-become-pass
 
-    # sudo.rs doesnt behave in WSL with ansible-playbook, use legacy sudo.ws as a workaround
+    # sudo.rs doesnt behave with ansible-playbook 
+    # https://bugs.launchpad.net/ubuntu/+source/rust-sudo-rs/+bug/2122414
+    # https://github.com/ansible/ansible/issues/85837
     ansible-playbook robsenv.yaml --ask-become-pass -e ansible_become_exe=/usr/bin/sudo.ws
 
 ### MacOS 15
