@@ -1,6 +1,16 @@
 ---
+- name: Download mise installer
+  ansible.builtin.get_url:
+    url: https://mise.run
+    dest: /tmp/mise-installer.sh
+    mode: "0755"
+  become: true
+
 - name: Install mise
-  ansible.builtin.apt:
-    name: mise
-    state: present
+  ansible.builtin.command:
+    cmd: /tmp/mise-installer.sh
+  environment:
+    MISE_INSTALL_PATH: /usr/local/bin/mise
+  args:
+    creates: /usr/local/bin/mise
   become: true
